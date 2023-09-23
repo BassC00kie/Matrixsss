@@ -25,5 +25,29 @@ int main()
     {
         matrix2[i] = new int[Size_M2];
     }
+    for (int i = 0; i < Size_N1; i++) {
+        for (int j = 0; j < Size_M1; j++)
+            matrix1[i][j] = i;
+    }
+    for (int i = 0; i < Size_N2; i++) {
+        for (int j = 0; j < Size_M2; j++)
+            matrix2[i][j] = i;
+    }
+    for (int i = 0; i < Size_N1; i++)
+    {
+        for (int j = 0; j < Size_M1; j++)
+        {
+            cout << matrix1[i][j] << ' ';
+        }
+        cout << '\n';
+    }
+    cout << '\n';
+    for (int i = 0; i < Size_N2; i++)
+    {
+        for (int j = 0; j < Size_M2; j++)
+        {
+            cout << matrix2[i][j] << ' ';
+        }
+        cout << '\n';
+    }
 }
-
