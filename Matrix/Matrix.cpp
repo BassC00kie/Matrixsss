@@ -1,4 +1,6 @@
 ﻿#include <iostream>
+#include "conio.h"
+#include <cstdlib> 
 using namespace std;
 int Size_N1;
 int Size_M1;
@@ -26,9 +28,25 @@ int plus(int** mat1, int** mat2) {
     }
     return 0;
 }
-int mult(int** mat1, int** mat2) {
+/*int mult(int** mat1, int** mat2) {
+
+}*/
+int perestan(int x) {
+    int abc[] = { 0 };
+    for (int i = 0; i < 3; i++) {
+        if (i == 0) {
+            abc[i] = x / 100;
+        }
+        if (i == 1) {
+            abc[i] = (x / 10) % 10;
+        }
+        if (i == 2) {
+            abc[i] = x % 100;
+        }
+    }
 
 }
+
 int main()
 {
     setlocale(LC_ALL, "Rus");
@@ -72,6 +90,7 @@ int main()
         }
         cout << '\n';
     }
-    plus();
-    return 0;
+    
+    
+    
 }
