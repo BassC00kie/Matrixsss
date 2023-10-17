@@ -1,19 +1,18 @@
-﻿#include <iostream>
+#include <iostream>
 #include "conio.h"
 #include <cstdlib> 
+#include <fstream>
 using namespace std;
 int Size_N1;
-int Size_M1;
-
-int plus(int** mat1, int** mat2) {
+int Size_M1 = Size_N1;
+int N;
+int plusing(int** mat1, int** mat2) {
     int** matrixS = new int* [Size_N1];
     for (int i = 0; i < Size_N1; i++)
     {
         matrixS[i] = new int[Size_M1];
     }
-    mat1 = new int* [Size_N1];
     for (int i = 0; i < Size_N1; i++) {
-        mat1[i] = new int[Size_M1];
         for (int j = 0; j < Size_M1; j++) {
             matrixS[i][j] = mat1[i][j] + mat2[i][j];
         }
@@ -31,30 +30,12 @@ int plus(int** mat1, int** mat2) {
 /*int mult(int** mat1, int** mat2) {
 
 }*/
-int perestan(int x) {
-    int abc[] = { 0 };
-    for (int i = 0; i < 3; i++) {
-        if (i == 0) {
-            abc[i] = x / 100;
-        }
-        if (i == 1) {
-            abc[i] = (x / 10) % 10;
-        }
-        if (i == 2) {
-            abc[i] = x % 100;
-        }
-    }
-
-}
 
 int main()
 {
     setlocale(LC_ALL, "Rus");
-    
-    cout << "Введите кол-во столбцов у матрицы" << "\n";
-    cin >> Size_N1;
-    cout << "Введите кол-во строк у матрицы" << "\n";
-    cin >> Size_M1;
+    ifstream outfile("U:\'������� �'\Matrixsss\\MatrixN1");
+    outfile >> Size_N1;
     int** matrix1 = new int* [Size_N1];
     for (int i = 0; i < Size_N1; i++)
     {
@@ -67,11 +48,16 @@ int main()
     }
     for (int i = 0; i < Size_N1; i++) {
         for (int j = 0; j < Size_M1; j++)
-            matrix1[i][j] = i;
+            outfile >> matrix1[i][j];
     }
     for (int i = 0; i < Size_N1; i++) {
         for (int j = 0; j < Size_M1; j++)
-            matrix2[i][j] = i;
+            if (i == j) {
+                matrix2[i][j] = 1;
+            }
+            else {
+                matrix2[i][j] = 0;
+            }
     }
     for (int i = 0; i < Size_N1; i++)
     {
@@ -90,7 +76,5 @@ int main()
         }
         cout << '\n';
     }
-    
-    
-    
+    plusing(matrix1, matrix2);
 }
