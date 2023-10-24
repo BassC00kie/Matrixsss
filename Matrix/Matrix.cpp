@@ -18,7 +18,7 @@ int** show(int** mat1) {
     cout << '\n';
     return mat1;
 }
-int** plusing1(int** mat1, int** mat2) {
+int** plusingMatr(int** mat1, int** mat2) {
     int** matrixS = new int* [Size_N1];
     for (int i = 0; i < Size_N1; i++)
     {
@@ -48,8 +48,24 @@ int** mulMat(int** mat1, int** mat2)
     }
     return matrixM;
 }
-
-
+void SwapStrngs(int** mat1, int a, int b) {
+    int strg;
+    for (int i = 0; i < Size_N1; i++) {
+        strg = mat1[a][i];
+        mat1[a][i] = mat1[b][i];
+        mat1[b][i] = strg;
+    }
+}
+void StrgsResidual(int** mat1, int a, int b) {
+    for (int i = 0; i < Size_N1; i++) {
+        mat1[a][i] = mat1[a][i] - mat1[b][i];
+    }
+}
+void StrgMultNum(int** mat1, int a, int b) {
+    for (int i = 0; i < Size_N1; i++) {
+        mat1[a][i] = mat1[a][i] * b;
+    }
+}
 int main()
 {
     ifstream outfile("MatrixN1.txt");
@@ -90,10 +106,32 @@ int main()
     show(matrix1);
     cout << "Second matrix:\n\n";
     show(matrix2);
-    int** matrixAnsSum =  plusing1(matrix1, matrix2);
+    int** matrixAnsSum =  plusingMatr(matrix1, matrix2);
     cout << "Sum:\n\n";
     show(matrixAnsSum);
     int** matrixAnsMult = mulMat(matrix1, matrix2);
     cout << "Mult:\n\n";
     show(matrixAnsMult);
+    int a, b, c;
+    cout << "Enter strngs u want to swap\n\n";
+    cin >> a >> b;
+    cout << '\n';
+    SwapStrngs(matrix1, a, b);
+    SwapStrngs(matrix2, a, b);
+    show(matrix1);
+    show(matrix2);
+    cout << "Enter strngs u want to reasid\n\n";
+    cin >> a >> b;
+    cout << '\n';
+    StrgsResidual(matrix1, a, b);
+    StrgsResidual(matrix2, a, b);
+    show(matrix1);
+    show(matrix2);
+    cout << "Enter strng and number u want to mult\n\n";
+    cin >> a >> c;
+    cout << '\n';
+    StrgMultNum(matrix1, a, c);
+    StrgMultNum(matrix2, a, c);
+    show(matrix1);
+    show(matrix2);
 }
