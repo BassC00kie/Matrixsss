@@ -15,6 +15,7 @@ int** show(int** mat1) {
         }
         cout << '\n';
     }
+    cout << '\n';
     return mat1;
 }
 int** plusing1(int** mat1, int** mat2) {
@@ -30,6 +31,24 @@ int** plusing1(int** mat1, int** mat2) {
     }
     return matrixS;
 }
+int** mulMat(int** mat1, int** mat2)
+{
+    int** matrixM = new int* [Size_N1];
+    for (int i = 0; i < Size_N1; i++)
+    {
+        matrixM[i] = new int[Size_M1];
+    }
+    for (int i = 0; i < Size_N1; i++) {
+        for (int j = 0; j < Size_M1; j++) {
+            matrixM[i][j] = 0;
+            for (int k = 0; k < Size_N1; k++) {
+                matrixM[i][j] += mat1[i][k] * mat2[k][j];
+            }
+        }
+    }
+    return matrixM;
+}
+
 
 int main()
 {
@@ -86,6 +105,8 @@ int main()
         cout << '\n';
     }
     cout << '\n';
-    int** matrixAns =  plusing1(matrix1, matrix2);
-    show(matrixAns);
+    int** matrixAnsSum =  plusing1(matrix1, matrix2);
+    show(matrixAnsSum);
+    int** matrixAnsMult = mulMat(matrix1, matrix2);
+    show(matrixAnsMult);
 }
