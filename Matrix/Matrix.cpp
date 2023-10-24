@@ -52,13 +52,12 @@ int** mulMat(int** mat1, int** mat2)
 
 int main()
 {
-    setlocale(LC_ALL, "Rus");
     ifstream outfile("MatrixN1.txt");
     if (outfile.is_open())
-        cout << "file has been opened\n\n";
+        cout << "File has been opened\n\n";
     else
     {
-        cout << "file hasn't been open\n\n";
+        cout << "!!File hasn't been open!!\n\n";
         return -1;
     }
     outfile >> Size_N1;
@@ -87,26 +86,14 @@ int main()
                 matrix2[i][j] = 0;
             }
     }
-    for (int i = 0; i < Size_N1; i++)
-    {
-        for (int j = 0; j < Size_M1; j++)
-        {
-            cout << matrix1[i][j] << ' ';
-        }
-        cout << '\n';
-    }
-    cout << '\n';
-    for (int i = 0; i < Size_N1; i++)
-    {
-        for (int j = 0; j < Size_M1; j++)
-        {
-            cout << matrix2[i][j] << ' ';
-        }
-        cout << '\n';
-    }
-    cout << '\n';
+    cout << "First matrix:\n\n";
+    show(matrix1);
+    cout << "Second matrix:\n\n";
+    show(matrix2);
     int** matrixAnsSum =  plusing1(matrix1, matrix2);
+    cout << "Sum:\n\n";
     show(matrixAnsSum);
     int** matrixAnsMult = mulMat(matrix1, matrix2);
+    cout << "Mult:\n\n";
     show(matrixAnsMult);
 }
