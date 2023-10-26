@@ -61,7 +61,7 @@ void StrgsResidual(int** mat1, int a, int b) {
         mat1[a][i] = mat1[a][i] - mat1[b][i];
     }
 }
-void StrgMultNum(int** mat1, int a, int b) {
+void StrgMultNum(int** mat1, int a, float b) {
     for (int i = 0; i < Size_N1; i++) {
         mat1[a][i] = mat1[a][i] * b;
     }
@@ -123,8 +123,9 @@ int main()
         }
     }
     while (true) {
-        int a, b, c;
-        cout << "Choose number operation you want\n1) Swap strings\n2) Strings residual\n3) String mult number\n";
+        int a, b;
+        float c;
+        cout << "Choose number of operation you want\n1) Swap strings\n2) Strings residual\n3) String mult number\n";
         int operation = 0;
         cin >> operation;
         if (operation == 1) {
