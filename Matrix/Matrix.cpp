@@ -112,26 +112,52 @@ int main()
     int** matrixAnsMult = mulMat(matrix1, matrix2);
     cout << "Mult:\n\n";
     show(matrixAnsMult);
-    int a, b, c;
-    cout << "Enter strngs u want to swap\n\n";
-    cin >> a >> b;
-    cout << '\n';
-    SwapStrngs(matrix1, a, b);
-    SwapStrngs(matrix2, a, b);
-    show(matrix1);
-    show(matrix2);
-    cout << "Enter strngs u want to reasid\n\n";
-    cin >> a >> b;
-    cout << '\n';
-    StrgsResidual(matrix1, a, b);
-    StrgsResidual(matrix2, a, b);
-    show(matrix1);
-    show(matrix2);
-    cout << "Enter strng and number u want to mult\n\n";
-    cin >> a >> c;
-    cout << '\n';
-    StrgMultNum(matrix1, a, c);
-    StrgMultNum(matrix2, a, c);
-    show(matrix1);
-    show(matrix2);
+    int** matrix1Clone = new int* [Size_N1];
+    for (int i = 0; i < Size_N1; i++)
+    {
+        matrix1Clone[i] = new int[Size_M1];
+    }
+    for (int i = 0; i < Size_N1; i++) {
+        for (int j = 0; j < Size_M1; j++) {
+            matrix1Clone[i][j]=matrix1[i][j];
+        }
+    }
+    while (true) {
+        int a, b, c;
+        cout << "Choose number operation you want\n1) Swap strings\n2) Strings residual\n3) String mult number\n";
+        int operation = 0;
+        cin >> operation;
+        if (operation == 1) {
+            cout << "Enter strngs u want to swap\n\n";
+            cin >> a >> b;
+            cout << '\n';
+            SwapStrngs(matrix1, a, b);
+            SwapStrngs(matrix2, a, b);
+            show(matrix1);
+            show(matrix2);
+        }
+        if (operation == 2) {
+            cout << "Enter strngs u want to reasid\n\n";
+            cin >> a >> b;
+            cout << '\n';
+            StrgsResidual(matrix1, a, b);
+            StrgsResidual(matrix2, a, b);
+            show(matrix1);
+            show(matrix2);
+        }
+        if (operation == 3) {
+            cout << "Enter strngs and number to mult\n\n";
+            cin >> a >> c;
+            cout << '\n';
+            StrgMultNum(matrix1, a, c);
+            StrgMultNum(matrix2, a, c);
+            show(matrix1);
+            show(matrix2);
+        }
+        if (matrix1Clone == matrix2) {
+            show(matrix1);
+            show(matrix2);
+            break;
+        }
+    }
 }
