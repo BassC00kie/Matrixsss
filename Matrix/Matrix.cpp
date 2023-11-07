@@ -56,14 +56,22 @@ void SwapStrngs(int** mat1, int a, int b) {
         mat1[b][i] = strg;
     }
 }
-void StrgsResidual(int** mat1, int a, int b) {
+void StrgsResidual(int** mat1, int a, int b, float K) {
     for (int i = 0; i < Size_N1; i++) {
-        mat1[a][i] = mat1[a][i] - mat1[b][i];
+        mat1[a][i] = mat1[a][i] - K*mat1[b][i];
     }
 }
 void StrgMultNum(int** mat1, int a, float b) {
     for (int i = 0; i < Size_N1; i++) {
         mat1[a][i] = mat1[a][i] * b;
+    }
+}
+void gauss(int** mat1) {
+    for (int j = 0; j < Size_N1; j++) {
+        for (int i = j+1; i < Size_N1; i++) {
+            int k = mat1[i][j] / mat1[j][j];
+            mat1[i][j] = mat1[i][j] - k * mat1[j][j];
+        }
     }
 }
 int main()
@@ -122,43 +130,55 @@ int main()
             matrix1Clone[i][j]=matrix1[i][j];
         }
     }
-    while (true) {
-        int a, b;
-        float c;
-        cout << "Choose number of operation you want\n1) Swap strings\n2) Strings residual\n3) String mult number\n";
-        int operation = 0;
-        cin >> operation;
-        if (operation == 1) {
-            cout << "Enter strngs u want to swap\n\n";
-            cin >> a >> b;
-            cout << '\n';
-            SwapStrngs(matrix1, a, b);
-            SwapStrngs(matrix2, a, b);
-            show(matrix1);
-            show(matrix2);
+    int solv;
+    cout << "How to solve\n1)Comp\n2)Ur self\n\n";
+    cin >> solv;
+    if (solv == 2){
+        while (true) {
+            int a, b;
+            float c, k;
+            cout << "Choose number of operation you want\n1) Swap strings\n2) Strings residual\n3) String mult number\n";
+            int operation = 0;
+            cin >> operation;
+            if (operation == 1) {
+                cout << "Enter strngs u want to swap\n\n";
+                cin >> a >> b;
+                cout << '\n';
+                SwapStrngs(matrix1, a, b);
+                SwapStrngs(matrix2, a, b);
+                show(matrix1);
+                show(matrix2);
+            }
+            if (operation == 2) {
+                cout << "Enter strngs u want to reasid\n\n";
+                cin >> a >> b;
+                cout << "\nEnter K";
+                cin >> k;
+                StrgsResidual(matrix1, a, b, k);
+                StrgsResidual(matrix2, a, b, k);
+                show(matrix1);
+                show(matrix2);
+            }
+            if (operation == 3) {
+                cout << "Enter strngs and number to mult\n\n";
+                cin >> a >> c;
+                cout << '\n';
+                StrgMultNum(matrix1, a, c);
+                StrgMultNum(matrix2, a, c);
+                show(matrix1);
+                show(matrix2);
+            }
+            if (matrix1Clone == matrix2) {
+                show(matrix1);
+                show(matrix2);
+                break;
+            }
         }
-        if (operation == 2) {
-            cout << "Enter strngs u want to reasid\n\n";
-            cin >> a >> b;
-            cout << '\n';
-            StrgsResidual(matrix1, a, b);
-            StrgsResidual(matrix2, a, b);
-            show(matrix1);
-            show(matrix2);
-        }
-        if (operation == 3) {
-            cout << "Enter strngs and number to mult\n\n";
-            cin >> a >> c;
-            cout << '\n';
-            StrgMultNum(matrix1, a, c);
-            StrgMultNum(matrix2, a, c);
-            show(matrix1);
-            show(matrix2);
-        }
-        if (matrix1Clone == matrix2) {
-            show(matrix1);
-            show(matrix2);
-            break;
-        }
+    }
+    if (solv == 1) {
+        gauss(matrix1);
+        gauss(matrix2);
+        show(matrix1);
+        show(matrix2);
     }
 }
