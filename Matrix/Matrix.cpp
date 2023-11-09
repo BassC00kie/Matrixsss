@@ -57,8 +57,9 @@ void SwapStrngs(int** mat1, int a, int b) {
     }
 }
 void StrgsResidual(int** mat1, int a, int b, float K) {
-    for (int i = 0; i < Size_N1; i++) {
+    for (int i = 0; i < Size_N1-1; i++) {
         mat1[a][i] = mat1[a][i] - K*mat1[b][i];
+
     }
 }
 void StrgMultNum(int** mat1, int a, float b) {
@@ -66,11 +67,12 @@ void StrgMultNum(int** mat1, int a, float b) {
         mat1[a][i] = mat1[a][i] * b;
     }
 }
-void gauss(int** mat1) {
+void gauss(int** mat1, int** mat2) {
     for (int j = 0; j < Size_N1; j++) {
         for (int i = j+1; i < Size_N1; i++) {
-            int k = mat1[i][j] / mat1[j][j];
-            mat1[i][j] = mat1[i][j] - k * mat1[j][j];
+            float k = mat1[i][j] / mat1[j][j];
+            StrgsResidual(mat1, i, j, k);
+            StrgsResidual(mat2, i, j, k);
         }
     }
 }
@@ -133,6 +135,7 @@ int main()
     int solv;
     cout << "How to solve\n1)Comp\n2)Ur self\n\n";
     cin >> solv;
+    cout << '\n';
     if (solv == 2){
         while (true) {
             int a, b;
@@ -176,8 +179,7 @@ int main()
         }
     }
     if (solv == 1) {
-        gauss(matrix1);
-        gauss(matrix2);
+        gauss(matrix1, matrix2);
         show(matrix1);
         show(matrix2);
     }
