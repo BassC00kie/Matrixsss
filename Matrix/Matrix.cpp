@@ -68,8 +68,15 @@ void StrgMultNum(int** mat1, int a, float b) {
     }
 }
 void gauss(int** mat1, int** mat2) {
-    for (int j = 0; j < Size_N1; j++) {
+    for (int j = 0; j <= Size_N1; j++) {
         for (int i = j+1; i < Size_N1; i++) {
+            float k = mat1[i][j] / mat1[j][j];
+            StrgsResidual(mat1, i, j, k);
+            StrgsResidual(mat2, i, j, k);
+        }
+    }
+    for (int j = Size_N1 - 1; j >= 0; j--) {
+        for (int i = j-1; i > 0; i--) {
             float k = mat1[i][j] / mat1[j][j];
             StrgsResidual(mat1, i, j, k);
             StrgsResidual(mat2, i, j, k);
